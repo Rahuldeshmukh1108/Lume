@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lume - Sign In</title>
+    <link rel="stylesheet" href="../Css/signin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo">Lume</div>
+            <img src="C:\Users\HP\neuroo\sign in\left image.png" alt="Illustration" class="illustration">
+            <h2>Connect, Learn, and Grow with Lume</h2>
+            <p>Unlock your potential with Lume – a space to connect, learn, and grow together!</p>
+        </div>
+        <div class="right-panel">
+            <h2>Welcome back to Lume.</h2>
+            <button class="google-signin">
+                <img src="C:\Users\HP\neuroo\sign in\google.png" alt="Google Icon"> Log in with Google
+            </button>
+            <form>
+                <label for="email">Email or Username</label>
+                <input type="text" id="email" placeholder="johndadev" required>
+                
+                <label for="password">Password</label>
+                <div class="input-container">
+                    <input type="password" id="password" placeholder="*" required>
+                    <span class="eye-icon">👁</span>
+                </div>
+                
+                <div class="terms">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                
+                <button type="submit" class="signup-btn">LOG IN</button>
+                <p>No Account yet? <a href="../Html/signup.html">SIGN UP</a></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const togglePassword = document.querySelector(".eye-icon");
+            const passwordField = document.querySelector("#password");
+            
+            togglePassword.addEventListener("click", function () {
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    togglePassword.innerHTML = "🙈";
+                } else {
+                    passwordField.type = "password";
+                    togglePassword.innerHTML = "👁";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

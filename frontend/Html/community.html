@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./vars.css" />
+    <link rel="stylesheet" href="../Css/community.css" />
+    <script defer src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script defer src="../../backend/community.js"></script>
+    <style>
+        a,
+        button,
+        input,
+        select,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          border: none;
+          text-decoration: none;
+          background: none;
+          -webkit-font-smoothing: antialiased;
+        }
+        menu,
+        ol,
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
+    </style>
+
+    <title>Lume connect</title>
+  </head>
+  <body>
+    <header>
+        <div class="nav">
+            <div id="lume">Lume</div>
+            <div class="item">
+              <div class="icon" id="features">Features</div>
+              <div class="icon" id="justice">Justice</div>
+              <div class="icon" id="about">About Us</div>
+              <div><img class="image" src="C:\Users\HP\neuroo\job portal\logo.png" />
+            </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="text--0-">Grow with a community that gets you.</h1>
+          <p class="text--1-">
+            Find neurounique friends and a genuine community that gets you and wants to help
+            you thrive.
+          </p>
+          <div class="button-container">
+            <button id="community-btn" class="text-0-1-1">KNOW YOUR COMMUNITY</button>
+          </div>          
+        </div>
+        <div class="hero-image">
+          <img src="C:\Users\HP\neuroo\community\community.png" alt="Community" />
+        </div>
+      </section>
+
+      <div class="app-container">
+        <aside class="sidebar">
+            <header>
+                <h1 class="logo">Lume</h1>
+                <button id="add-friend-btn" class="btn">Add Friend</button>
+            </header>
+            <ul id="contact-list" class="contact-list"></ul>
+        </aside>
+        <main class="chat-container">
+            <header class="chat-header">
+              <div class="chat-header">
+                <img id="chat-profile-pic" src="default.png" alt="Profile Picture">
+                <div class="chat-info">
+                    <span id="chat-title">Select a Chat</span>
+                    <span id="chat-status">Online</span>
+                </div>
+              </div>            
+            </header>
+            <main><div id="messages" class="messages"></div></main>
+            <footer class="chat-footer">
+                <input type="text" id="message-input" placeholder="Type a message...">
+                <button id="send-btn">Send</button>
+            </footer>
+        </main>
+    </div>
+    
+    <script>
+    let activeChat = "";
+let contacts = [
+    { name: "Mind Spectrum", profilePic: "https://dynamic.brandcrowd.com/asset/logo/9db6085d-eade-46ef-a440-82dbc72c0b74/logo-search-grid-2x?logoTemplateVersion=1&v=637665194617000000&text=Mind+Spectrum&colorpalette=grayscale",
+     status: "33 Members" },
+    { name: "Neuro Nexus", profilePic: "https://dynamic.brandcrowd.com/asset/logo/0e6e1867-902b-470e-b060-d8fa6e0d247d/logo-search-grid-2x?logoTemplateVersion=1&v=638753887545300000&text=Neuro+Nexus", 
+    status: "90 Members" },
+    { name: "Let's Grow Together", profilePic: "https://via.placeholder.com/50",
+     status: "115 Members" },
+    { name: "Lume.", profilePic: "https://via.placeholder.com/50", 
+    status: "459 Members" },
+    { name: "Innovative Online Shopping", profilePic: "https://via.placeholder.com/50",
+     status: "77 Members" }
+];
+
+let messages = {}; // Store messages per contact
+
+document.addEventListener("DOMContentLoaded", function () {
+    const contactList = document.getElementById("contact-list");
+    const chatTitle = document.getElementById("chat-title");
+    const chatProfilePic = document.getElementById("chat-profile-pic");
+    const chatStatus = document.getElementById("chat-status");
+    const messagesContainer = document.getElementById("messages");
+    const messageInput = document.getElementById("message-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    // Populate contact list
+    contacts.forEach(contact => {
+        const li = document.createElement("li");
+        li.className = "contact";
+        li.innerHTML = `
+            <img src="${contact.profilePic}" class="profile-pic">
+            <div class="contact-info">
+                <span class="contact-name">${contact.name}</span>
+                <span class="last-message">${contact.status}</span>
+            </div>
+        `;
+        li.addEventListener("click", () => openChat(contact));
+        contactList.appendChild(li);
+    });
+
+    function openChat(contact) {
+    if (!contact) return;
+
+    activeChat = contact.name;
+
+    // Get chat header elements
+    let chatTitle = document.getElementById("chat-title");
+    let chatProfilePic = document.getElementById("chat-profile-pic");
+    let chatStatus = document.getElementById("chat-status");
+
+    // Check if elements exist before updating
+    if (chatTitle && chatProfilePic && chatStatus) {
+        chatTitle.innerText = contact.name; // Update name
+        chatProfilePic.src = contact.profilePic; // Update profile picture
+        chatStatus.innerText = contact.status; // Update status
+    } else {
+        console.error("Chat header elements not found!");
+    }
+
+    // Load messages for the selected contact
+    if (!messages[contact.name]) {
+        messages[contact.name] = [];
+    }
+    loadMessages(contact.name);
+}
+    function loadMessages(contactName) {
+        messagesContainer.innerHTML = ""; 
+        messages[contactName].forEach(msg => {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.textContent = msg;
+            messagesContainer.appendChild(messageElement);
+        });
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function sendMessage() {
+        const messageText = messageInput.value.trim();
+        if (!messageText || !activeChat) {
+            alert("Select a chat and enter a message.");
+            return;
+        }
+        
+        if (!messages[activeChat]) {
+            messages[activeChat] = [];
+        }
+        
+        messages[activeChat].push(messageText);
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        messageElement.textContent = messageText;
+        messagesContainer.appendChild(messageElement);
+        
+        messageInput.value = "";
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    messageInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    });
+});
+    </script>
+    </main>
+  </body>
+</html>

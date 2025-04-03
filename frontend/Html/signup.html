@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lume - Sign Up</title>
+    <link rel="stylesheet" href="../Css/signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo-container">
+                <div class="logo">
+                    <span>{·}</span>
+                </div>
+                <h1 class="logo-text">Lume</h1>
+            </div>
+            
+            <div class="illustration-container">
+                <img src="left image.png" alt="Illustration of people collaborating" class="illustration">
+            </div>
+            
+            <div class="left-content">
+                <h2>Connect, Learn, and Grow with Lume</h2>
+                <p>Unlock your potential with Lume - a space to connect, learn, and grow together!</p>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="form-container">
+                <h2>Join & Connect the Fastest Growing Community</h2>
+                
+                <button class="google-btn" id="googleSignIn">
+                    <img src="google.png" alt="Google logo">
+                    Sign up with Google
+                </button>
+                
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="johndadev" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="johndoe@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="password" placeholder="••••••••••••" required>
+                            <button type="button" id="togglePassword" class="toggle-password">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I accept the terms & Condition</label>
+                    </div>
+                    
+                    <button type="submit" class="signup-btn">SIGN UP</button>
+                    
+                    <div class="login-link">
+                        Own an Account? <a href="../Html/signin.html" id="loginLink">JUMP LOG IN</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <p id="notificationMessage"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

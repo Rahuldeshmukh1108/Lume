@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="vars.css" />
+    <link rel="stylesheet" href="../Css/jobportal.css" />
+
+    <style>
+        a,
+        button,
+        input,
+        select,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          border: none;
+          text-decoration: none;
+          background: none;
+          -webkit-font-smoothing: antialiased;
+        }
+  
+        menu, 
+        ol,
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
+    </style>
+
+    <title>Job Portal</title>
+  </head>
+  <body>
+   <!-- Navigation -->
+   <nav class="nav">
+    <div ><a href="../Html/landingpage.html"id="lume">Lume</a></div>
+    
+    <div class="menu-icon" id="menuIcon">☰</div> <!-- Menu Icon for Mobile -->
+    
+    <div class="item" id="navMenu">
+      <a href="../Html/2048.html" target="_blank" class="icon">Game</a>
+      <a href="../Html/features.html" target="_blank" class="icon">Features</a>
+      <a href="../Html/scheme.html" target="_blank" class="icon">Schemes</a>
+      <a href="../Html/aboutus.html" target="_blank" class="icon">About us</a>
+      
+      <div id="sign"><span ><a href="../Html/signup.html" class="signup">Sign Up</a></span></div>
+    </div>
+  </nav>
+
+    <div class="container">
+      <div class="text-title">Search for a Job</div>  
+      <div class="search-container">
+          <div class="search-box">
+              <img src="search.png" alt="Search Icon" class="icon">
+              <input type="text" placeholder="Search Job Titles..." />
+          </div>
+  
+          <div class="search-box">
+              <img src="location.png" alt="Location Icon" class="icon">
+              <input type="text" placeholder="Search Location..." />
+          </div>
+  
+          <button class="search-button">Search...</button>
+          
+          <div class="filter-icon">
+              <img src="filter.png" alt="Filter Icon">
+          </div>
+      </div>
+  </div>  
+
+  <div class="text-subtitle">SEE SEARCH RESULTS</div>    
+    <div class="job-container">
+        <div class="job-listing">
+            <div class="job-header">
+                <div class="job-title">Software Engineer</div>
+                <div class="salary-location">
+                    <input type="text" class="job-input" placeholder="Salary">
+                    <input type="text" class="location" placeholder="📍Location...">
+                </div>
+            </div>
+        
+            <div class="job-details">
+                <input type="text" class="company" placeholder="Company">
+                <input type="text" class="experience" placeholder="Exp:">
+            </div>
+        
+            <p class="job-description">
+                Lume empowers neurodivergent individuals with AI-driven support, job opportunities,
+                mental health resources, real-world skill-building, and a vibrant community...
+            </p>
+        
+            <div class="job-actions">
+                <span class="see-more">See more</span>
+                <button class="apply-btn">APPLY</button>
+            </div>
+        </div>
+
+        <div class="job-listing">
+            <div class="job-header">
+                <div class="job-title">Data Analyst</div>
+                <div class="salary-location">
+                    <input type="text" class="job-input" placeholder="Salary">
+                    <input type="text" class="location" placeholder="📍Location...">
+                </div>
+            </div>
+        
+            <div class="job-details">
+                <input type="text" class="company" placeholder="Company">
+                <input type="text" class="experience" placeholder="Exp:">
+            </div>
+        
+            <p class="job-description">
+                Join a data-driven company and help analyze trends
+                that shape the future of technology...
+            </p>
+        
+            <div class="job-actions">
+                <span class="see-more">See more</span>
+                <button class="apply-btn">APPLY</button>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

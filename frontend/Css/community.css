@@ -1,0 +1,425 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, sans-serif;
+    background-color: white;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 50px;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */ 
+      padding-top: 20px; 
+      padding-bottom: 26px; 
+      padding-left: 50px; 
+      padding-right: 50px; 
+      background: white; 
+  }
+  
+  #lume {
+    color: black; font-size: 35px; font-family: Inter; font-weight: 800; line-height: 20px; word-wrap: break-word;
+  }
+  
+  .item {
+    width: 495px; height: 20px; justify-content: flex-end; align-items: center; gap: 48px; display: inline-flex;
+  }
+  
+  .icon {
+    color: black; font-size: 18px; font-family: Inter; font-weight: 510; line-height: 30px; word-wrap: break-word; white-space: nowrap;
+  }
+  
+  .image {
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+  }
+  
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+    }
+  
+    .item {
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+  
+    .image {
+      margin-top: 10px;
+    }
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: auto;
+    padding: 5vw;
+  }
+  
+  .hero-content {
+    flex: 1;
+    max-width: 50%;
+    padding-left: 2vw; /* Moves text left */
+    padding-right: 2vw;
+  }
+  
+  .text--0- {
+    font-family: 'Jomolhari', serif;
+    font-weight: 700;
+    font-size: 3vw;
+    line-height: 1.5;
+    color: #000000;
+  }
+  
+  .text--1- {
+    font-family: 'Jomolhari', serif;
+    font-weight: 400;
+    font-size: 1.8vw;
+    line-height: 1.5;
+    color: #000000;
+    margin-top: 1vw;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vw;
+  }
+  
+  .text-0-1-1 {
+    background: #BE94D8;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    font-size: 1.5vw;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    color: black;
+    padding: 10px 25px;
+    border-radius: 30px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    outline: none;
+    display: inline-block;
+  }
+  
+  /* Hover Animation */
+  .text-0-1-1:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Click Animation */
+  .text-0-1-1:active {
+    transform: scale(0.95);
+  }
+  
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5vw; /* Moves image right */
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-content {
+      max-width: 100%;
+      padding-left: 0;
+    }
+  
+    .hero-image {
+      justify-content: center;
+      padding-right: 0;
+      margin-top: 2vw;
+    }
+  
+    .text--0- {
+      font-size: 5vw;
+    }
+  
+    .text--1- {
+      font-size: 3vw;
+    }
+  
+    .text-0-1-1 {
+      font-size: 3vw;
+    }
+  }
+  
+  .app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 30%;
+    background-color: #075e54;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Add Friend Button */
+  .btn {
+    padding: 8px 12px;
+    background-color: #128c7e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn:hover {
+    background-color: #0d6b5a;
+  }
+  
+  .add-friend-btn {
+    font-weight: bold;
+  }
+  
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 300px; /* Adjust height as needed */
+    padding: 10px;
+  }
+  
+  .contact-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .contact-list li:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  
+  /* Optional: Style scrollbar for better appearance */
+  #contact-list::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  #contact-list::-webkit-scrollbar-thumb {
+    background: #ffffff;
+  }
+  
+  #contact-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* User Info */
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info h2 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .contact {
+    display: flex; 
+    align-items: center; /* Aligns items vertically */
+    padding: 10px;
+    gap: 10px; /* Adds space between profile pic and text */
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column; /* Align text properly */
+  }
+  
+  .contact-name {
+    font-weight: bold;
+    color: white;
+  }
+  
+  .last-message {
+    font-size: 12px;
+    color: lightgray;
+  }
+  
+  .profile-pic {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes it circular */
+    object-fit: cover; /* Ensures it maintains aspect ratio */
+    border: 2px solid #128C7E; /* Adds a WhatsApp-like border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for better visibility */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .profile-pic:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+  }
+  
+  /* Status */
+  .status {
+    font-size: 12px;
+    color: #bebebe;
+  }
+  
+  /* Chat Container */
+  .chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #e5ddd5;
+  }
+  
+  .chat-header {
+    background-color: #008080;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .chat-header img {
+    width: 40px;  /* Profile picture size */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message {
+    background-color: #dcf8c6;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    max-width: 70%;
+  }
+  
+  /* Chat Footer (Fixed at Bottom) */
+  .chat-footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+    position: absolute;  /* Fix at the bottom */
+    bottom: 0;
+    left: 0;
+    width:  calc(100% - 300px);  /* Full width */
+    height: 60px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for better visibility */
+  }
+  
+  .chat-footer input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    width: 100%; /* Takes full available width */
+  }
+  
+  .chat-footer button {
+    background-color: #128c7e;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+    }
+    .chat-container {
+        display: none;
+    }
+  }
+  
+  /* Full Chat Container */
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #e5ddd5;
+    height: 100vh;
+    width: calc(100% - 300px); /* Adjust width for sidebar */
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+  }
+  
+  /* Messages Section */
+  .messages {
+    flex-grow: 1; /* Takes up remaining space */
+    overflow-y: auto;
+    padding: 15px;
+    max-height: calc(100vh - 60px); /* Ensures it fits properly */
+  }

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lume - Productivity App</title>
+    <!-- Fix: Correct the CSS path -->
+    <link rel="stylesheet" href="../Css/todolist.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+     <!-- Navigation -->
+     <nav class="nav">
+        <div ><a href="../Html/landingpage.html"id="lume">Lume</a></div>
+        
+        <div class="menu-icon" id="menuIcon">☰</div> <!-- Menu Icon for Mobile -->
+        
+        <div class="item" id="navMenu">
+          <a href="../Html/2048.html" target="_blank" class="icon">Game</a>
+          <a href="../Html/features.html" target="_blank" class="icon">Features</a>
+          <a href="../Html/scheme.html" target="_blank" class="icon">Schemes</a>
+          <a href="../Html/aboutus.html" target="_blank" class="icon">About us</a>
+          
+          <div id="sign"><span ><a href="../Html/signup.html" class="signup">Sign Up</a></span></div>
+        </div>
+      </nav>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+            
+            <div id="login-form" class="auth-form active">
+                <h2>Login to Lume</h2>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="button" id="login-btn" class="btn submit-btn">Login</button>
+                <div id="login-error" class="error-message"></div>
+            </div>
+            
+            <div id="signup-form" class="auth-form">
+                <h2>Create an Account</h2>
+                <div class="form-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <button type="button" id="signup-btn" class="btn submit-btn">Sign Up</button>
+                <div id="signup-error" class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <main id="app-content" style="display: none;">
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="to-do-title">To-Do List</h2>
+                <p class="hero-description">
+                    Stay organized and boost productivity with our smart to-do list. Plan, track, and complete your tasks effortlessly!
+                </p>
+            </div>
+            <div class="action-buttons">
+                <button id="thoughts-btn" class="btn thoughts-btn">Dump Your Thoughts</button>
+                <button id="calendar-btn" class="btn calendar-btn">Calendar</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-card thoughts-card">
+                <div class="sticky-notes-container">
+                    <div class="sticky-note permanent-note">
+                        <p>Lume makes me Less Stress</p>
+                    </div>
+                    <div id="notes-container" class="notes-stack">
+                        <!-- Additional notes will be added here -->
+                    </div>
+                    <div class="notes-navigation">
+                        <button id="prev-note" class="note-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                        <span id="note-counter">0/0</span>
+                        <button id="next-note" class="note-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-card calendar-card">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prev-month" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                        <h3 id="current-month">June 2023</h3>
+                        <button id="next-month" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div class="weekdays-header">
+                        <div class="weekday">Sun</div>
+                        <div class="weekday">Mon</div>
+                        <div class="weekday">Tue</div>
+                        <div class="weekday">Wed</div>
+                        <div class="weekday">Thu</div>
+                        <div class="weekday">Fri</div>
+                        <div class="weekday">Sat</div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Calendar days will be generated by JavaScript -->
+                    </div>
+                </div>
+                <div id="google-calendar" class="google-calendar-container">
+                    <!-- Google Calendar will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="task-manager">
+            <div class="user-greeting">
+                <h2>Hello, <span id="user-name">User</span></h2>
+                <button id="add-task-btn" class="add-task-btn">+ Add New Task</button>
+            </div>
+
+            <div class="task-columns">
+                <div class="task-column">
+                    <div class="column-header to-do">
+                        <h3>To-do</h3>
+                    </div>
+                    <div class="tasks-container" id="todo-tasks">
+                        <!-- Tasks will be added here -->
+                    </div>
+                </div>
+                
+                <div class="task-column">
+                    <div class="column-header on-progress">
+                        <h3>On Progress</h3>
+                    </div>
+                    <div class="tasks-container" id="progress-tasks">
+                        <!-- Tasks will be added here -->
+                    </div>
+                </div>
+                
+                <div class="task-column">
+                    <div class="column-header on-hold">
+                        <h3>On Hold</h3>
+                    </div>
+                    <div class="tasks-container" id="hold-tasks">
+                        <!-- Tasks will be added here -->
+                    </div>
+                </div>
+                
+                <div class="task-column">
+                    <div class="column-header completed">
+                        <h3>Completed</h3>
+                    </div>
+                    <div class="tasks-container" id="completed-tasks">
+                        <!-- Tasks will be added here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-container">
+        <div class="spinner"></div>
+        <p>Loading your data...</p>
+    </div>
+
+    <!-- Modal for adding new tasks -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Task</h2>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title">Task Title</label>
+                    <input type="text" id="task-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea id="task-description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-due-date">Due Date</label>
+                    <input type="date" id="task-due-date">
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">Priority</label>
+                    <select id="task-priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn submit-btn">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for dumping thoughts -->
+    <div id="thoughts-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Dump Your Thoughts</h2>
+            <form id="thoughts-form">
+                <div class="form-group">
+                    <textarea id="thoughts-text" placeholder="Write down your thoughts here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="note-color">Note Color</label>
+                    <select id="note-color">
+                        <option value="#f9efaf">Yellow</option>
+                        <option value="#a8f0c0">Green</option>
+                        <option value="#a8d8f0">Blue</option>
+                        <option value="#f0c3a8">Orange</option>
+                        <option value="#e0c3fc">Purple</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn submit-btn">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for adding calendar events -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Calendar Event</h2>
+            <form id="event-form">
+                <div class="form-group">
+                    <label for="event-title">Event Title</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description</label>
+                    <textarea id="event-description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="event-start-date">Start Date</label>
+                    <input type="date" id="event-start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-start-time">Start Time</label>
+                    <input type="time" id="event-start-time">
+                </div>
+                <div class="form-group">
+                    <label for="event-end-date">End Date</label>
+                    <input type="date" id="event-end-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-end-time">End Time</label>
+                    <input type="time" id="event-end-time">
+                </div>
+                <div class="form-group">
+                    <label for="event-location">Location (Optional)</label>
+                    <input type="text" id="event-location">
+                </div>
+                <button type="submit" class="btn submit-btn">Add Event</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile Menu -->
+    <div id="user-menu" class="user-menu">
+        <div class="user-menu-header">
+            <div class="user-menu-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-menu-info">
+                <div id="user-menu-name">User</div>
+                <div id="user-menu-email">user@example.com</div>
+            </div>
+        </div>
+        <div class="user-menu-items">
+            <button id="logout-btn" class="user-menu-item">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Fix: Remove Cloudflare email decode script and fix path to app.js -->
+    <script src="../../backend/todolist.js"></script> 
+</body>
+</html>

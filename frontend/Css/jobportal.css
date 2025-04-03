@@ -1,0 +1,322 @@
+/* General Navbar Styles */
+.nav {
+  width: 95%; 
+  padding: 20px 50px; 
+  background: white; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensures navbar stays on top */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+/* Logo */
+#lume {
+  color: black;
+  font-size: 30px;
+  font-family: Inter;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Nav Items */
+.item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+
+/* Links */
+.icon {
+  color: black;
+  font-size: 18px;
+  font-family: Inter;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Signup Button */
+.signup {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 500;
+}
+
+#sign {
+  padding: 10px 30px;
+  background: black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#sign:hover {
+  background: #333;
+}
+
+/* Hamburger Menu */
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+
+  .menu-icon {
+    display: block; /* Show menu icon */
+  }
+
+  .item {
+    display: none; /* Hide menu initially */
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .item.show {
+    display: flex; /* Show menu when toggled */
+  }
+}
+.container {
+  text-align: center;
+  padding-top: 10px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Ensures elements stack vertically */
+  align-items: center; /* Centers the search bar */
+  background-color: white;
+  margin-top: 15px;
+}
+
+.text-title {
+  font-family: 'Inter', sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.text-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: medium;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 10px;
+  margin-left: 250px;
+  margin-top: 10px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  padding: 10px 20px;
+  width: 275px;
+}
+
+.search-box .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+}
+
+.search-button {
+  background: #FFC0CB;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 70px;
+  padding: 15px 30px;
+  font-size: medium;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.filter-icon {
+  width: 45px;
+  height: 45px;
+}
+
+.filter-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Job Listings Container - Starts Below "SEE SEARCH RESULTS" */
+.job-container {
+  position: relative;
+  max-height: 500px;  /* Limit height for multiple job listings */
+  width: 70%;  /* Use width instead of left/right */
+  margin: 10px auto 0;  /* Center the container */
+  overflow-y: auto;  /* Scroll only when necessary */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Individual Job Listing Box */
+.job-listing {
+  background-color: #ffeef2;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Job Header - Title & Inputs */
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Job Title */
+.job-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Salary & Location Inputs */
+.salary-location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Input Fields (Salary & Location) */
+.job-input, .location {
+  padding: 5px 15px;
+  border-radius: 25px;  /* Rounded shape */
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: white;
+  text-align: left;
+  font-weight: bold;
+  width: 180px;  /* Set same width */
+  height: 35px;  /* Set same height */
+  display: flex;
+  align-items: center;
+}
+
+/* Job Details (Company & Experience) */
+.job-details {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Company & Experience Buttons */
+.company, .experience {
+  width: 180px;
+  height: 35px;
+  padding: 5px 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background: white;
+  text-align: left;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+/* Job Description */
+.job-description {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Apply & See More Section */
+.job-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Apply Button */
+.apply-btn {
+  background-color: #FFC0CB;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* "See More" Link */
+.see-more {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .job-container {
+      max-width: 90%;
+  }
+
+  .job-header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .salary-location {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .job-details {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}

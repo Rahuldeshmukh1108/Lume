@@ -1,0 +1,316 @@
+/* General Navbar Styles */
+.nav {
+    width: 95%; 
+    padding: 20px 50px; 
+    background: white; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensures navbar stays on top */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   
+  }
+  
+  /* Logo */
+  #lume {
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  /* Nav Items */
+  .item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  
+  /* Links */
+  .icon {
+    color: black;
+    font-size: 18px;
+    font-family: Inter;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  /* Signup Button */
+  .signup {
+    color: white;
+    font-size: 16px;
+    font-family: Inter;
+    font-weight: 500;
+  }
+  
+  #sign {
+    padding: 10px 30px;
+    background: black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  #sign:hover {
+    background: #333;
+  }
+  
+  /* Hamburger Menu */
+  .menu-icon {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+  }
+  
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: row;
+      padding: 10px 20px;
+    }
+  
+    .menu-icon {
+      display: block; /* Show menu icon */
+    }
+  
+    .item {
+      display: none; /* Hide menu initially */
+      flex-direction: column;
+      background: white;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      text-align: center;
+      gap: 20px;
+      padding: 20px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .item.show {
+      display: flex; /* Show menu when toggled */
+    }
+  }
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 500px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url('https://media.istockphoto.com/id/2154822813/photo/hand-interacting-with-digital-network-interface.jpg?s=612x612&w=0&k=20&c=_FXYcakykA-pP203_NhS3TzxGjK76mYiEwdSTDPqXmk=');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust opacity here (0.5 = 50% dark) */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensures text stays above the dimmer */
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+/* Feature Sections */
+.feature {
+    padding: 80px 0;
+}
+
+.feature-alt {
+    background-color: #f9f9f9;
+}
+
+.feature-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.feature-text, .feature-image {
+    flex: 1;
+}
+
+.feature-text h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.feature-text p {
+    color: #666;
+    margin-bottom: 24px;
+    font-size: large;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #000;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #333;
+}
+
+/* Footer Styles */
+footer {
+    background-color: white;
+    padding: 40px 20px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    width: 100%;
+}
+
+/* Top Footer Section */
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Footer Logo */
+.footer-logo h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Footer Links */
+.footer-links {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.footer-column {
+    text-align: left;
+}
+
+.footer-links h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #000;
+}
+
+/* Bottom Footer Section */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: #777;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #333;
+}
+
+/* Blue Heart */
+.blue-heart {
+    color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+    
+    .feature-content {
+        flex-direction: column;
+    }
+}
