@@ -1,147 +1,56 @@
-/* General Navbar Styles */
-.nav {
-  width: 95%; 
-  padding: 20px 50px; 
-  background: white; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; /* Ensures navbar stays on top */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
- 
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: #1e1e2f; /* Darker Background for Contrast */
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
-/* Logo */
-#lume {
-  color: black;
-  font-size: 30px;
-  font-family: Inter;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-/* Nav Items */
-.item {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-
-/* Links */
-.icon {
-  color: black;
-  font-size: 18px;
-  font-family: Inter;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-/* Signup Button */
-.signup {
-  color: white;
-  font-size: 16px;
-  font-family: Inter;
-  font-weight: 500;
-}
-
-#sign {
-  padding: 10px 30px;
-  background: black;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#sign:hover {
-  background: #333;
-}
-
-/* Hamburger Menu */
-.menu-icon {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: black;
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-  .nav {
-    flex-direction: row;
-    padding: 10px 20px;
-  }
-
-  .menu-icon {
-    display: block; /* Show menu icon */
-  }
-
-  .item {
-    display: none; /* Hide menu initially */
-    flex-direction: column;
-    background: white;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    text-align: center;
-    gap: 20px;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .item.show {
-    display: flex; /* Show menu when toggled */
-  }
-}
 h1 {
-    font-size: 50px;
-    margin: 20px 0;
-    color: #ffcc00;
+  font-size: 50px;
+  margin: 20px 0;
+  color: #ffcc00;
 }
 
 /* Score Box */
 .score-container {
-    font-size: 24px;
-    background: #444;
-    padding: 15px;
-    border-radius: 10px;
-    display: inline-block;
-    color: #fff;
-    margin-bottom: 20px;
+  font-size: 24px;
+  background: #444;
+  padding: 15px;
+  border-radius: 10px;
+  display: inline-block;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 /* Game Board Styling */
 .game-container {
-    width: 420px;
-    height: 420px;
-    margin: 20px auto;
-    display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);
-    gap: 10px;
-    background: #2b2b3c; /* Darker Grid Background */
-    padding: 10px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  width: 420px;
+  height: 420px;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 10px;
+  background: #2b2b3c; /* Darker Grid Background */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 /* Tile Styling */
 .tile {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: bold;
-    border-radius: 10px;
-    transition: transform 0.1s ease-in-out, background 0.2s;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: transform 0.1s ease-in-out, background 0.2s;
 }
 
 /* Colors for Different Tiles */
@@ -156,42 +65,42 @@ h1 {
 .tile[data-value="512"] { background: #ffb400; color: black; }
 .tile[data-value="1024"] { background: #d07906; color: white; }
 .tile[data-value="2048"] { 
-    background: #00ffcc; 
-    color: black; 
-    animation: glow 0.5s ease-in-out infinite alternate; 
+  background: #00ffcc; 
+  color: black; 
+  animation: glow 0.5s ease-in-out infinite alternate; 
 }
 
 /* Merge Animation */
 @keyframes merge {
-    0% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+  0% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .tile-merged {
-    animation: merge 0.2s ease-in-out;
+  animation: merge 0.2s ease-in-out;
 }
 
 /* Glowing effect for 2048 */
 @keyframes glow {
-    0% { box-shadow: 0 0 15px #00ffcc; }
-    100% { box-shadow: 0 0 30px #00ffcc; }
+  0% { box-shadow: 0 0 15px #00ffcc; }
+  100% { box-shadow: 0 0 30px #00ffcc; }
 }
 
 /* Buttons */
 button {
-    margin-top: 15px;
-    padding: 12px 25px;
-    font-size: 20px;
-    background: #ffcc00;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease-in-out, transform 0.1s;
+  margin-top: 15px;
+  padding: 12px 25px;
+  font-size: 20px;
+  background: #ffcc00;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out, transform 0.1s;
 }
 
 button:hover {
-    background: #ffaa00;
-    transform: scale(1.05);
+  background: #ffaa00;
+  transform: scale(1.05);
 }

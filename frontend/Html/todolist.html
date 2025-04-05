@@ -14,21 +14,25 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-     <!-- Navigation -->
-     <nav class="nav">
-        <div ><a href="../Html/landingpage.html"id="lume">Lume</a></div>
-        
-        <div class="menu-icon" id="menuIcon">☰</div> <!-- Menu Icon for Mobile -->
-        
-        <div class="item" id="navMenu">
-          <a href="../Html/2048.html" target="_blank" class="icon">Game</a>
-          <a href="../Html/features.html" target="_blank" class="icon">Features</a>
-          <a href="../Html/scheme.html" target="_blank" class="icon">Schemes</a>
-          <a href="../Html/aboutus.html" target="_blank" class="icon">About us</a>
-          
-          <div id="sign"><span ><a href="../Html/signup.html" class="signup">Sign Up</a></span></div>
+    <header>
+        <div ><a href="../Html/landingpage.html" class="logo"> <h1>Lume</h1></a>
+           
         </div>
-      </nav>
+        <nav>
+            <ul>
+                <li><a href="../Html/2048.html" target="_blank">Games</a></li>
+                <li><a href="../Html/features.html" target="_blank">Features</a></li>
+                <li><a href="../Html/scheme.html" target="_blank">Schemes</a></li>
+                <li><a href="../Html/aboutus.html" target="_blank">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile" id="user-profile">
+            <div class="user-icon">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
 
     <!-- Auth Modal -->
     <div id="auth-modal" class="modal">

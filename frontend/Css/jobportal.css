@@ -1,104 +1,64 @@
-/* General Navbar Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, sans-serif;
+  background-color: white;
+}
+
 .nav {
-  width: 95%; 
-  padding: 20px 50px; 
-  background: white; 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; /* Ensures navbar stays on top */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
- 
-}
-
-/* Logo */
-#lume {
-  color: black;
-  font-size: 30px;
-  font-family: Inter;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-/* Nav Items */
-.item {
   display: flex;
-  gap: 20px;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 50px;
+  background: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Adds subtle shadow */ 
+  padding-top: 20px; 
+  padding-bottom: 26px; 
+  padding-left: 50px; 
+  padding-right: 50px; 
+  background: white; 
 }
 
+#lume {
+  color: black; font-size: 35px; font-family: Inter; font-weight: 800; line-height: 20px; word-wrap: break-word;
+}
 
-/* Links */
+.item {
+  width: 495px; height: 20px; justify-content: flex-end; align-items: center; gap: 48px; display: inline-flex;
+}
+
 .icon {
-  color: black;
-  font-size: 18px;
-  font-family: Inter;
-  font-weight: 500;
-  text-decoration: none;
+  color: black; font-size: 18px; font-family: Inter; font-weight: 510; line-height: 30px; word-wrap: break-word; white-space: nowrap;
 }
 
-/* Signup Button */
-.signup {
-  color: white;
-  font-size: 16px;
-  font-family: Inter;
-  font-weight: 500;
-}
-
-#sign {
-  padding: 10px 30px;
-  background: black;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#sign:hover {
-  background: #333;
-}
-
-/* Hamburger Menu */
-.menu-icon {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: black;
+.image {
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
 }
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .nav {
-    flex-direction: row;
-    padding: 10px 20px;
-  }
-
-  .menu-icon {
-    display: block; /* Show menu icon */
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
   }
 
   .item {
-    display: none; /* Hide menu initially */
     flex-direction: column;
-    background: white;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    text-align: center;
-    gap: 20px;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    margin-top: 10px;
   }
 
-  .item.show {
-    display: flex; /* Show menu when toggled */
+  .image {
+    margin-top: 10px;
   }
-}
+  }
+
 .container {
   text-align: center;
   padding-top: 10px;

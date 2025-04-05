@@ -327,18 +327,21 @@
   object-fit: cover;
 }
 
+
 /* Feature Text */
 .feature-list {
   color: #000000;
   font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
+  text-decoration: none;
 }
 
 .feature-list-caption {
   color: #828282;
   font-size: 1rem;
   text-align: center;
+  text-decoration: none;
 }
 
 /* Responsive Adjustments */

@@ -292,6 +292,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  text-decoration: none;
 }
 .copy2 {
   display: flex;

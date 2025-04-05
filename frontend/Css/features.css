@@ -1,104 +1,84 @@
-/* General Navbar Styles */
-.nav {
-    width: 95%; 
-    padding: 20px 50px; 
-    background: white; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;
-    position: fixed;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Inter,Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: large;
+    font-family: Inter; 
+    font-weight: 510; 
+    line-height: 30px; 
+    word-wrap: break-word; 
+    white-space: nowrap;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+header {
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    z-index: 1000; /* Ensures navbar stays on top */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-   
-  }
-  
-  /* Logo */
-  #lume {
-    color: black;
-    font-size: 30px;
-    font-family: Inter;
-    font-weight: 800;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  /* Nav Items */
-  .item {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  
-  
-  /* Links */
-  .icon {
-    color: black;
-    font-size: 18px;
-    font-family: Inter;
-    font-weight: 500;
-    text-decoration: none;
-  }
-  
-  /* Signup Button */
-  .signup {
+    width: 100%;
+    background: transparent; /* Remove background image */
     color: white;
-    font-size: 16px;
-    font-family: Inter;
-    font-weight: 500;
-  }
-  
-  #sign {
-    padding: 10px 30px;
-    background: black;
-    border-radius: 8px;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: white; font-size: 35px; font-family: Inter; font-weight: 800; line-height: 20px; word-wrap: break-word;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    margin-right: 30px;
+}
+
+nav ul li a:hover {
+    color: #ccc;
+}
+
+.user-icon {
+    font-size: x-large;
     cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  #sign:hover {
-    background: #333;
-  }
-  
-  /* Hamburger Menu */
-  .menu-icon {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: black;
-  }
-  
-  /* RESPONSIVE DESIGN */
-  @media (max-width: 768px) {
-    .nav {
-      flex-direction: row;
-      padding: 10px 20px;
-    }
-  
-    .menu-icon {
-      display: block; /* Show menu icon */
-    }
-  
-    .item {
-      display: none; /* Hide menu initially */
-      flex-direction: column;
-      background: white;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      width: 100%;
-      text-align: center;
-      gap: 20px;
-      padding: 20px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
-  
-    .item.show {
-      display: flex; /* Show menu when toggled */
-    }
-  }
+}
+
+
 /* Hero Section */
 .hero {
     position: relative;
