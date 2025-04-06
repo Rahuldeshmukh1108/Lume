@@ -21,7 +21,7 @@ body {
 }
 
 #lume {
-  color: black; font-size: 35px; font-family: Inter; font-weight: 800; line-height: 20px; word-wrap: break-word;
+  color: black; font-size: 35px; font-family: Inter; font-weight: 800; line-height: 20px; word-wrap: break-word;text-decoration: none;
 }
 
 .item {
