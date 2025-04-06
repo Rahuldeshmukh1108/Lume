@@ -163,7 +163,9 @@
   color: white;
   font-size: 1.2vw;
   font-weight: 500;
+  text-decoration: none;
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
