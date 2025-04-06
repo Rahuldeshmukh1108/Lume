@@ -73,137 +73,667 @@
         </div>
       </section>
 
-      <div class="app-container">
-        <aside class="sidebar">
-            <header>
-                <h1 class="logo">Lume</h1>
-                <button id="add-friend-btn" class="btn">Add Friend</button>
-            </header>
-            <ul id="contact-list" class="contact-list"></ul>
-        </aside>
-        <main class="chat-container">
-            <header class="chat-header">
-              <div class="chat-header">
-                <img id="chat-profile-pic" src="../image/profile icon.png" alt="Profile Picture">
-                <div class="chat-info">
-                    <span id="chat-title">Select a Chat</span>
-                    <span id="chat-status">Online</span>
-                </div>
-              </div>            
-            </header>
-            <main><div id="messages" class="messages"></div></main>
-            <footer class="chat-footer">
-                <input type="text" id="message-input" placeholder="Type a message...">
-                <button id="send-btn">Send</button>
-            </footer>
-        </main>
-    </div>
+      <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar show" id="sidebar">
+          <div class="logo-container">
+            <div class="logo">Lume</div>
+          </div>
+          <div class="search-container">
+            <input type="text" class="search-input" placeholder="Find or start a conversation">
+          </div>
+          <div class="tabs">
+            <div class="tab active" data-tab="all">All</div>
+            <div class="tab" data-tab="groups">Groups</div>
+            <div class="tab" data-tab="direct">Direct</div>
+          </div>
+          <div class="conversations" id="conversations">
+            <!-- Conversations will be populated by JavaScript -->
+          </div>
+        </div>
     
-    <script>
-    let activeChat = "";
-let contacts = [
-    { name: "Mind Spectrum", profilePic: "https://dynamic.brandcrowd.com/asset/logo/9db6085d-eade-46ef-a440-82dbc72c0b74/logo-search-grid-2x?logoTemplateVersion=1&v=637665194617000000&text=Mind+Spectrum&colorpalette=grayscale",
-     status: "33 Members" },
-    { name: "Neuro Nexus", profilePic: "https://dynamic.brandcrowd.com/asset/logo/0e6e1867-902b-470e-b060-d8fa6e0d247d/logo-search-grid-2x?logoTemplateVersion=1&v=638753887545300000&text=Neuro+Nexus", 
-    status: "90 Members" },
-    { name: "Let's Grow Together", profilePic: "https://via.placeholder.com/50",
-     status: "115 Members" },
-    { name: "Lume.", profilePic: "https://via.placeholder.com/50", 
-    status: "459 Members" },
-    { name: "Innovative Online Shopping", profilePic: "https://via.placeholder.com/50",
-     status: "77 Members" }
-];
-
-let messages = {}; // Store messages per contact
-
-document.addEventListener("DOMContentLoaded", function () {
-    const contactList = document.getElementById("contact-list");
-    const chatTitle = document.getElementById("chat-title");
-    const chatProfilePic = document.getElementById("chat-profile-pic");
-    const chatStatus = document.getElementById("chat-status");
-    const messagesContainer = document.getElementById("messages");
-    const messageInput = document.getElementById("message-input");
-    const sendBtn = document.getElementById("send-btn");
-
-    // Populate contact list
-    contacts.forEach(contact => {
-        const li = document.createElement("li");
-        li.className = "contact";
-        li.innerHTML = `
-            <img src="${contact.profilePic}" class="profile-pic">
-            <div class="contact-info">
-                <span class="contact-name">${contact.name}</span>
-                <span class="last-message">${contact.status}</span>
+        <!-- Main chat area -->
+        <div class="chat-area" id="chat-area">
+          <div id="empty-state" class="empty-state">
+            <svg class="empty-state-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            <h3 class="empty-state-title">No conversation selected</h3>
+            <p class="empty-state-text">Choose a conversation from the sidebar or start a new one</p>
+          </div>
+    
+          <div id="chat-content" style="display: none; height: 100%; flex-direction: column;">
+            <div class="chat-header">
+              <div class="chat-header-left">
+                <button class="back-button" id="back-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                </button>
+                <div class="avatar" id="chat-avatar">
+                  <img src="https://via.placeholder.com/40" alt="Chat avatar">
+                  <span class="online-indicator"></span>
+                </div>
+                <div class="chat-title">
+                  <div class="chat-name" id="chat-name">Select a conversation</div>
+                  <div class="chat-members" id="chat-members"></div>
+                </div>
+              </div>
+              <div class="chat-header-right">
+                <button class="header-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                  </svg>
+                </button>
+                <button class="header-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </button>
+                <button class="header-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12" y2="8"></line>
+                  </svg>
+                </button>
+              </div>
             </div>
-        `;
-        li.addEventListener("click", () => openChat(contact));
-        contactList.appendChild(li);
+    
+            <div class="messages-container" id="messages-container">
+              <div class="date-divider">
+                <span class="date-badge">TODAY</span>
+              </div>
+              <!-- Messages will be populated by JavaScript -->
+            </div>
+    
+            <div class="input-container">
+              <div class="message-input-wrapper">
+                <button class="attachment-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                  </svg>
+                </button>
+                <input type="text" class="message-input" id="message-input" placeholder="Type a message">
+                <button class="emoji-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                </button>
+                <button class="send-button" id="send-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Login overlay -->
+      <div class="login-overlay" id="login-overlay">
+        <div class="login-container">
+          <div class="login-header">
+            <div class="login-logo">Lume</div>
+            <div class="login-subtitle">Connect with neurodivergent individuals</div>
+          </div>
+          <form class="login-form" id="login-form">
+            <div class="form-group">
+              <label class="form-label" for="username">Username</label>
+              <input type="text" id="username" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" id="password" class="form-input" required>
+            </div>
+            <button type="submit" class="login-button">Sign In</button>
+          </form>
+        </div>
+      </div>    
+    <script>
+     // User state
+     let currentUser = null;
+    let activeTab = 'all';
+    let selectedChatId = null;
+
+    // Sample data
+    const groups = [
+      {
+        id: 'neuro-nexus',
+        name: 'Neuro Nexus',
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'Welcome to our supportive community!',
+        time: '4:30 PM',
+        unread: false,
+        online: true,
+        type: 'group',
+        members: '28 Members',
+        messages: [
+          {
+            id: '1',
+            sender: 'moderator',
+            senderName: 'Alex (Moderator)',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Welcome to Neuro Nexus! This is a safe space for neurodivergent individuals to connect, share experiences, and support each other.",
+            time: '3:15 PM'
+          },
+          {
+            id: '2',
+            sender: 'user',
+            senderName: 'Jamie',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Thanks for having me! I'm excited to be part of this community.",
+            time: '3:20 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'Taylor',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Has anyone tried mindfulness techniques for managing sensory overload? I've been struggling lately.",
+            time: '3:25 PM'
+          },
+          {
+            id: '4',
+            sender: 'user',
+            senderName: 'Jordan',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "I've found deep breathing and noise-cancelling headphones really helpful. Happy to share more strategies if you're interested!",
+            time: '3:30 PM'
+          }
+        ]
+      },
+      {
+        id: 'lets-grow-together',
+        name: "Let's Grow Together",
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'New resources for skill development',
+        time: '3:45 PM',
+        unread: true,
+        online: true,
+        type: 'group',
+        members: '42 Members',
+        messages: [
+          {
+            id: '1',
+            sender: 'moderator',
+            senderName: 'Sam (Moderator)',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Hello everyone! I've just uploaded some new resources for developing social skills in our shared drive. Feel free to check them out!",
+            time: '3:30 PM'
+          },
+          {
+            id: '2',
+            sender: 'user',
+            senderName: 'Riley',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Thanks Sam! The last resources you shared were really helpful for me.",
+            time: '3:35 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'Casey',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "I'm planning to host a virtual meetup this weekend for anyone who wants to practice conversation skills in a safe environment. Who's interested?",
+            time: '3:40 PM'
+          },
+          {
+            id: '4',
+            sender: 'user',
+            senderName: 'Morgan',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Count me in! What time were you thinking?",
+            time: '3:45 PM'
+          }
+        ]
+      },
+      {
+        id: 'innovative-online-shopping',
+        name: 'Innovative Online Shopping',
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'Thread Lorem ipsum dolor sit amet...',
+        time: '4:30 PM',
+        unread: false,
+        online: true,
+        type: 'group',
+        members: '44 Members',
+        messages: [
+          {
+            id: '1',
+            sender: 'user',
+            senderName: 'Meera',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Hey! 🍕 Don't forget our pizza night at your place this Saturday. I'm bringing my famous veggie pizza...",
+            time: '3:17 PM'
+          },
+          {
+            id: '2',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Sounds delicious, Meera! 🤤 Can't wait for Saturday! By the way, do you think we should get some ice cream for dessert?",
+            time: '3:25 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'Meera',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "🍦 I'm all in for ice cream. I'll bring my favorite flavors. What's your preference?",
+            time: '3:37 PM'
+          },
+          {
+            id: '4',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Awesome! 🍪 I love chocolate chip cookie dough. Looking forward to pizza party on friday!!",
+            time: '3:28 PM'
+          }
+        ]
+      }
+    ];
+
+    const individuals = [
+      {
+        id: 'george-alan',
+        name: 'George Alan',
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'Lorem ipsum dolor sit amet consectetur...',
+        time: '4:30 PM',
+        unread: false,
+        online: true,
+        type: 'direct',
+        messages: [
+          {
+            id: '1',
+            sender: 'user',
+            senderName: 'George Alan',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Hi there! How are you doing today?",
+            time: '4:15 PM'
+          },
+          {
+            id: '2',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "I'm doing well, thanks for asking! How about you?",
+            time: '4:20 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'George Alan',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Pretty good! Just finished a great book on astronomy. Have you read anything interesting lately?",
+            time: '4:25 PM'
+          },
+          {
+            id: '4',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Actually, I've been reading about deep sea creatures. The bioluminescent ones are fascinating!",
+            time: '4:30 PM'
+          }
+        ]
+      },
+      {
+        id: 'safiya-fareena',
+        name: 'Safiya Fareena',
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'Video',
+        time: '4:30 PM',
+        unread: true,
+        online: true,
+        type: 'direct',
+        messages: [
+          {
+            id: '1',
+            sender: 'user',
+            senderName: 'Safiya Fareena',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Hey, I found this great video on stim toys that might help with focus. Want to check it out?",
+            time: '4:15 PM'
+          },
+          {
+            id: '2',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "That sounds really helpful! Yes, please share it.",
+            time: '4:20 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'Safiya Fareena',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Just sent you the video link. Let me know what you think!",
+            time: '4:25 PM'
+          },
+          {
+            id: '4',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Thanks! I'll watch it tonight and let you know my thoughts.",
+            time: '4:30 PM'
+          }
+        ]
+      },
+      {
+        id: 'robert-allen',
+        name: 'Robert Allen',
+        avatar: 'https://via.placeholder.com/40',
+        lastMessage: 'Photo Lorem ipsum dolor...',
+        time: '4:30 PM',
+        unread: false,
+        online: true,
+        type: 'direct',
+        messages: [
+          {
+            id: '1',
+            sender: 'user',
+            senderName: 'Robert Allen',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Check out this cool pattern I found! It's so satisfying to look at.",
+            time: '4:15 PM'
+          },
+          {
+            id: '2',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "Wow, that's really beautiful! I love the symmetry.",
+            time: '4:20 PM'
+          },
+          {
+            id: '3',
+            sender: 'user',
+            senderName: 'Robert Allen',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "I thought you'd appreciate it! I've been collecting these kinds of patterns.",
+            time: '4:25 PM'
+          },
+          {
+            id: '4',
+            sender: 'self',
+            senderName: 'You',
+            senderAvatar: 'https://via.placeholder.com/40',
+            content: "You should make a digital gallery of them. I'd love to see more!",
+            time: '4:30 PM'
+          }
+        ]
+      }
+    ];
+
+    // DOM elements
+    const conversationsContainer = document.getElementById('conversations');
+    const messagesContainer = document.getElementById('messages-container');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-button');
+    const backButton = document.getElementById('back-button');
+    const sidebar = document.getElementById('sidebar');
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginForm = document.getElementById('login-form');
+    const chatContent = document.getElementById('chat-content');
+    const emptyState = document.getElementById('empty-state');
+    const chatName = document.getElementById('chat-name');
+    const chatMembers = document.getElementById('chat-members');
+    const chatAvatar = document.getElementById('chat-avatar');
+    const tabs = document.querySelectorAll('.tab');
+
+    // Login handler - FIXED: Added proper event handling and explicit display style
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      if (username && password) {
+        // In a real app, you would validate credentials with a server
+        currentUser = {
+          id: 'current-user',
+          name: username,
+          avatar: 'https://via.placeholder.com/40'
+        };
+        
+        // Explicitly set display style to 'none' to ensure the overlay is hidden
+        loginOverlay.style.display = 'none';
+        
+        // Force a redraw to ensure the overlay is removed
+        document.body.style.overflow = 'auto';
+        
+        // Render conversations after successful login
+        renderConversations();
+      }
     });
 
-    function openChat(contact) {
-    if (!contact) return;
+    // Tab switching
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeTab = tab.dataset.tab;
+        renderConversations();
+      });
+    });
 
-    activeChat = contact.name;
-
-    // Get chat header elements
-    let chatTitle = document.getElementById("chat-title");
-    let chatProfilePic = document.getElementById("chat-profile-pic");
-    let chatStatus = document.getElementById("chat-status");
-
-    // Check if elements exist before updating
-    if (chatTitle && chatProfilePic && chatStatus) {
-        chatTitle.innerText = contact.name; // Update name
-        chatProfilePic.src = contact.profilePic; // Update profile picture
-        chatStatus.innerText = contact.status; // Update status
-    } else {
-        console.error("Chat header elements not found!");
-    }
-
-    // Load messages for the selected contact
-    if (!messages[contact.name]) {
-        messages[contact.name] = [];
-    }
-    loadMessages(contact.name);
-}
-    function loadMessages(contactName) {
-        messagesContainer.innerHTML = ""; 
-        messages[contactName].forEach(msg => {
-            const messageElement = document.createElement("div");
-            messageElement.classList.add("message");
-            messageElement.textContent = msg;
-            messagesContainer.appendChild(messageElement);
+    // Render conversations based on active tab
+    function renderConversations() {
+      conversationsContainer.innerHTML = '';
+      
+      if (activeTab === 'all' || activeTab === 'groups') {
+        // Add groups section
+        const groupsSection = document.createElement('div');
+        groupsSection.innerHTML = '<div class="section-title">Groups</div>';
+        conversationsContainer.appendChild(groupsSection);
+        
+        groups.forEach(group => {
+          renderConversationItem(group);
         });
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+      
+      if (activeTab === 'all' || activeTab === 'direct') {
+        // Add direct messages section
+        const directSection = document.createElement('div');
+        directSection.innerHTML = '<div class="section-title">Direct Messages</div>';
+        conversationsContainer.appendChild(directSection);
+        
+        individuals.forEach(individual => {
+          renderConversationItem(individual);
+        });
+      }
     }
 
+    // Render a single conversation item
+    function renderConversationItem(conversation) {
+      const conversationEl = document.createElement('div');
+      conversationEl.className = `conversation-item ${conversation.id === selectedChatId ? 'active' : ''}`;
+      conversationEl.dataset.id = conversation.id;
+      
+      let typeIcon = '';
+      if (conversation.type === 'video') {
+        typeIcon = '<svg class="message-type-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>';
+      } else if (conversation.type === 'photo') {
+        typeIcon = '<svg class="message-type-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
+      } else if (conversation.type === 'thread' || conversation.type === 'group') {
+        typeIcon = '<svg class="message-type-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+      } else if (conversation.type === 'call') {
+        typeIcon = '<svg class="message-type-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>';
+      }
+      
+      conversationEl.innerHTML = `
+        <div class="avatar">
+          <img src="${conversation.avatar}" alt="${conversation.name}">
+          ${conversation.online ? '<span class="online-indicator"></span>' : ''}
+        </div>
+        <div class="conversation-details">
+          <div class="conversation-header">
+            <span class="conversation-name">${conversation.name}</span>
+            <span class="conversation-time">${conversation.time}</span>
+          </div>
+          <div class="conversation-message">
+            ${typeIcon}
+            <span>${conversation.lastMessage}</span>
+            ${conversation.unread ? '<span class="unread-badge">1</span>' : ''}
+          </div>
+        </div>
+      `;
+      
+      conversationEl.addEventListener('click', () => {
+        selectConversation(conversation.id);
+      });
+      
+      conversationsContainer.appendChild(conversationEl);
+    }
+
+    // Select a conversation
+    function selectConversation(id) {
+      selectedChatId = id;
+      
+      // Update active state in sidebar
+      document.querySelectorAll('.conversation-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.id === id) {
+          item.classList.add('active');
+        }
+      });
+      
+      // Find the selected conversation
+      const conversation = [...groups, ...individuals].find(c => c.id === id);
+      
+      if (conversation) {
+        // Update chat header
+        chatName.textContent = conversation.name;
+        chatMembers.textContent = conversation.members || '';
+        chatAvatar.querySelector('img').src = conversation.avatar;
+        chatAvatar.querySelector('img').alt = conversation.name;
+        
+        if (conversation.online) {
+          chatAvatar.querySelector('.online-indicator').style.display = 'block';
+        } else {
+          chatAvatar.querySelector('.online-indicator').style.display = 'none';
+        }
+        
+        // Show chat content and hide empty state
+        emptyState.style.display = 'none';
+        chatContent.style.display = 'flex';
+        
+        // Render messages
+        renderMessages(conversation.messages);
+        
+        // On mobile, hide sidebar and show chat
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('show');
+        }
+      }
+    }
+
+    // Render messages
+    function renderMessages(messages) {
+      // Clear existing messages except the date divider
+      const dateDivider = messagesContainer.querySelector('.date-divider');
+      messagesContainer.innerHTML = '';
+      messagesContainer.appendChild(dateDivider);
+      
+      messages.forEach(message => {
+        const messageEl = document.createElement('div');
+        messageEl.className = `message ${message.sender === 'self' ? 'sent' : 'received'}`;
+        
+        messageEl.innerHTML = `
+          <div class="avatar">
+            <img src="${message.senderAvatar}" alt="${message.senderName}">
+          </div>
+          <div class="message-content">
+            <div class="message-bubble">${message.content}</div>
+            <div class="message-time">${message.time}</div>
+          </div>
+        `;
+        
+        messagesContainer.appendChild(messageEl);
+      });
+      
+      // Scroll to bottom
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Send a new message
     function sendMessage() {
-        const messageText = messageInput.value.trim();
-        if (!messageText || !activeChat) {
-            alert("Select a chat and enter a message.");
-            return;
-        }
-        
-        if (!messages[activeChat]) {
-            messages[activeChat] = [];
-        }
-        
-        messages[activeChat].push(messageText);
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("message");
-        messageElement.textContent = messageText;
-        messagesContainer.appendChild(messageElement);
-        
-        messageInput.value = "";
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      const content = messageInput.value.trim();
+      if (!content || !selectedChatId) return;
+      
+      // Find the selected conversation
+      const conversationIndex = [...groups, ...individuals].findIndex(c => c.id === selectedChatId);
+      if (conversationIndex === -1) return;
+      
+      const conversation = [...groups, ...individuals][conversationIndex];
+      
+      const newMessage = {
+        id: Date.now().toString(),
+        sender: 'self',
+        senderName: currentUser.name,
+        senderAvatar: currentUser.avatar,
+        content: content,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      
+      // Add message to conversation
+      conversation.messages.push(newMessage);
+      
+      // Update last message preview
+      conversation.lastMessage = content;
+      conversation.time = newMessage.time;
+      
+      // Re-render messages
+      renderMessages(conversation.messages);
+      
+      // Update conversation list
+      renderConversations();
+      
+      // Clear input
+      messageInput.value = '';
     }
 
-    sendBtn.addEventListener("click", sendMessage);
-    messageInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            sendMessage();
-        }
+    // Event listeners
+    sendButton.addEventListener('click', sendMessage);
+    
+    messageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
     });
-});
+    
+    backButton.addEventListener('click', () => {
+      sidebar.classList.add('show');
+    });
+
+    // Handle responsive behavior
+    function handleResize() {
+      if (window.innerWidth <= 768) {
+        if (!selectedChatId) {
+          sidebar.classList.add('show');
+        } else {
+          sidebar.classList.remove('show');
+        }
+      } else {
+        sidebar.classList.add('show');
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+    
+    // Initialize
+    handleResize();
     </script>
     </main>
   </body>
