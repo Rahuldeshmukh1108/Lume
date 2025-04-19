@@ -567,107 +567,125 @@ max-width: 1200px;
 }
 
 /* Footer */
-.footer {
-  background: #f5f3f3;
-  padding: 60px 5% 30px;
+/* Footer Styles */
+footer {
+  background-color: #2d3748;
+  color: #e2e8f0;
+  padding: 60px 0 20px;
 }
 
-.footer-content {
+.footer-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-wrap: wrap;
   gap: 40px;
-  margin-bottom: 40px;
 }
 
-.footer-section {
+.footer-logo {
   flex: 1;
-  min-width: 200px;
+  min-width: 250px;
 }
 
-.footer-section h3 {
-  color: var(--text-color);
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.footer-section ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-section ul li a {
-  color: var(--text-light);
-  transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-  color: var(--accent-color);
-}
-
-.newsletter-form {
-  display: flex;
-  margin-top: 15px;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px 0 0 4px;
-  outline: none;
-}
-
-.newsletter-form button {
-  padding: 10px 15px;
-  background: black;
+.footer-logo h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
   color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.newsletter-form button:hover {
-  background: #333;
+.footer-logo p {
+  color: #a0aec0;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  min-width: 160px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.footer-column ul li {
+  margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+  color: #a0aec0;
+  font-size: 15px;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.footer-column ul li a:hover {
+  color: white;
+  transform: translateX(5px);
 }
 
 .footer-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding-top: 30px;
-  border-top: 1px solid var(--border-color);
-}
-
-.bottomlume {
-  color: black;
-  font-size: 24px;
-  font-family: Inter, sans-serif;
-  font-weight: 600;
-}
-
-.copyright {
-  color: var(--text-light);
-  font-size: 16px;
   text-align: center;
+  padding-top: 40px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.social {
-  display: flex;
-  
-  margin-top: 15px;
+.footer-bottom p {
+  color: #a0aec0;
+  font-size: 14px;
 }
 
-.social a {
-  transition: transform 0.3s ease;
-}
-
-.social a:hover {
-  transform: translateY(-3px);
+.brand-name {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 /* Responsive Design */
@@ -688,7 +706,7 @@ max-width: 1200px;
 
 @media (max-width: 768px) {
   .nav {
-    padding: 15px 5%;
+    padding: 14px 5%;
   }
   
   .menu-icon {
@@ -700,7 +718,7 @@ max-width: 1200px;
     flex-direction: column;
     background: white;
     position: absolute;
-    top: 70px;
+    top: 68px;
     left: 0;
     width: 100%;
     text-align: center;
@@ -774,5 +792,24 @@ max-width: 1200px;
   .quick-link-card {
     width: 100%;
     max-width: 300px;
+  }
+}
+@media (max-width: 768px) { .footer-container {
+  flex-direction: column;
+  gap: 30px;
+}
+
+.footer-links {
+  width: 100%;
+  justify-content: space-between;
+}}
+@media (max-width: 576px) {
+  .footer-links {
+      flex-direction: column;
+      gap: 30px;
+  }
+
+  .footer-column {
+      width: 100%;
   }
 }
