@@ -6,118 +6,184 @@
     <title>Lume - Features</title>
     <link rel="stylesheet" href="../Css/features.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-      <!-- Header/Navigation -->
-      <header>
-        <div class="container">
-            <a href="../../index.html" class="logo">Lume</a>
-            <nav>
-                <ul>
-                    <li><a href="../Html/2048.html" target="_blank">Games</a></li>
-                    <li><a href="../Html/features.html" target="_blank">Features</a></li>
-                    <li><a href="../Html/scheme.html" target="_blank">Schemes</a></li>
-                    <li><a href="../Html/aboutus.html" target="_blank">About Us</a></li>
-                </ul>
-                <div class="user-icon">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-            </nav>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="logo-container">
+            <a href="index.html" id="lume">Lume</a>
         </div>
-    </header>
+        
+        <div class="menu-icon" id="menuIcon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <div class="item" id="navMenu">
+            <a href="frontend/Html/2048.html" target="_blank" class="icon nav-link">
+                <span class="icon-text">MindPlay🧠</span>
+            </a>
+            <a href="frontend/Html/features.html" target="_blank" class="icon nav-link">
+                <span class="icon-text">Features</span>
+            </a>
+            <a href="frontend/Html/scheme.html" target="_blank" class="icon nav-link">
+                <span class="icon-text">Schemes</span>
+            </a>
+            <a href="frontend/Html/aboutus.html" target="_blank" class="icon nav-link">
+                <span class="icon-text">About us</span>
+            </a>
+            
+            <div id="sign">
+                <a href="frontend/Html/signup.html" class="signup">Sign Up</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Features</h1>
-            <p>Empowering You with Smart & Seamless Productivity!</p>
+            <h1 class="gradient-text">Features</h1>
+            <p>Tools That Empower. A Space That Understands. Welcome to LUME <span class="sparkle">✨</span></p>
+            <a href="#features" class="btn btn-primary">Explore Features</a>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
     </section>
 
-    <!-- To-Do List Feature -->
-    <section class="feature">
-        <div class="container">
-            <div class="feature-content">
-                <div class="feature-text">
-                    <h2>To-Do List</h2>
-                    <p>Stay organized and boost productivity with our smart to-do list. Plan, track, and complete your tasks effortlessly!</p>
-                    <a href="../Html/todolist.html" class="btn">Click Here</a>
-                </div>
-                <div class="feature-image">
-                    <img src="../image/featuretodolist.jpg" alt="Robot with to-do list">
+    <!-- Features Section -->
+    <div id="features" class="features-wrapper">
+        <!-- To-Do List Feature -->
+        <section class="feature" data-aos="fade-up">
+            <div class="container">
+                <div class="feature-content">
+                    <div class="feature-text">
+                        <div class="feature-header">
+                            <div class="feature-icon">
+                                <i class="fas fa-list-check"></i>
+                            </div>  
+                            <h2>To-Do List</h2>
+                        </div>
+                        <p>Stay organized and boost productivity with our smart to-do list. Plan, track, and complete your tasks effortlessly!</p>
+                        <a href="../Html/todolist.html" class="btn btn-feature">
+                            <span>Try It Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="feature-image">
+                        <div class="image-container">
+                            <img src="../image/featuretodolist.jpg" alt="To-do list feature">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Search Jobs Feature -->
-    <section class="feature feature-alt">
-        <div class="container">
-            <div class="feature-content">
-                <div class="feature-image">
-                    <img src="../image/feaaturejobportal.jpg" alt="Job search interface">
-                </div>
-                <div class="feature-text">
-                    <h2>Search Jobs</h2>
-                    <p>Explore endless opportunities with our smart job search! Find the perfect role that matches your skills and passion.</p>
-                    <a href="../Html/jobportal.html" class="btn">Click Here</a>
+        <!-- Search Jobs Feature -->
+        <section class="feature feature-alt" data-aos="fade-up">
+            <div class="container">
+                <div class="feature-content">
+                    <div class="feature-image">
+                        <div class="image-container">
+                            <img src="../image/feaaturejobportal.jpg" alt="Job search interface">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="feature-text">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h2>Search Jobs</h2>
+                        <p>Find roles that fit YOU. Dream jobs, passion projects, or first steps — we got you covered <span class="emoji">💼✨</span></p>
+                        <a href="../Html/jobportal.html" class="btn btn-feature">
+                            <span>Find Jobs</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- LumeConnect Feature -->
-    <section class="feature">
-        <div class="container">
-            <div class="feature-content">
-                <div class="feature-text">
-                    <h2>LumeConnect</h2>
-                    <p>Engage, share, and collaborate with like-minded individuals. Join meaningful discussions and grow together!</p>
-                    <a href="../Html/community.html" class="btn">Click Here</a>
-                </div>
-                <div class="feature-image">
-                    <img src="../image/featurelumeconnect.jpg" alt="Group of diverse people">
+        <!-- LumeConnect Feature -->
+        <section class="feature" data-aos="fade-up">
+            <div class="container">
+                <div class="feature-content">
+                    <div class="feature-text">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h2>LumeConnect</h2>
+                        <p>Engage, share, and collaborate with like-minded individuals. Join meaningful discussions and grow together!</p>
+                        <a href="../Html/community.html" class="btn btn-feature">
+                            <span>Connect Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="feature-image">
+                        <div class="image-container">
+                            <img src="../image/featurelumeconnect.jpg" alt="Community connection">
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-logo">
                 <h2>Lume</h2>
+                <p>Your go-to platform for amazing features and services.</p>
+                <div class="social-icons">
+                    <a href="#facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
             <div class="footer-links">
                 <div class="footer-column">
-                    <h3>Explore:</h3>
+                    <h3>Company</h3>
                     <ul>
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="../Html/aboutus.html">About us</a></li>
-                        <li><a href="../Html/aboutus.html">Contact us</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Our Services:</h3>
+                    <h3>Support</h3>
                     <ul>
-                        <li><a href="../Html/community.html">LumeConnect</a></li>
-                        <li><a href="../Html/todolist.html">LumeCare</a></li>
-                        <li><a href="../Html/jobportal.html">LumeCareer</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <p>© 2025 Lume. Made with <span class="blue-heart">💙</span> for Every Mind.</p>
+            <p>&copy; 2025 <span class="brand-name">Lume</span>. All rights reserved.</p>
         </div>
     </footer>
-    
+
     <!-- FontAwesome for Icons -->
-    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="/Lume/Lume/backend/features.js"></script>
 </body>
 </html>
