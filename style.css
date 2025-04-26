@@ -4,7 +4,7 @@
   --primary-dark: #4f46e5;
   --primary-light: #a5b4fc;
   --accent-color: #e54add;
-  --accent-hover: #d33bc7;
+  --accent-hover: #d53f8c;
   --text-color: #1f2937;
   --text-light: #6b7280;
   --background-color: #f9fafb;
@@ -386,7 +386,7 @@ max-width: 1200px;
 /* Feature Heading */
 .featureheading {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   color: black;
   font-size: 2.7rem;
   font-family: Inter, sans-serif;
@@ -397,7 +397,7 @@ max-width: 1200px;
 /* Feature Content */
 .feature-content {
   width: 90%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto 40px;
   font-family: "Inter", sans-serif;
   font-size: 1.2rem;
@@ -409,7 +409,7 @@ max-width: 1200px;
 /* Card Container */
 .all-card {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: stretch;
   gap: 30px;
   flex-wrap: wrap;
